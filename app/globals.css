@@ -20,3 +20,67 @@ body {
   @apply font-inter;
   @apply font-ibm-plex-serif;
 }
+
+/* Base calendar styles */
+.react-calendar {
+  background-color: #171717; /* Match your black background */
+  color: #ededed; /* Light text color for better contrast */
+  border: none;
+  border-radius: 8px;
+  width: 100%; /* Ensures proper responsiveness */
+  font-family: inherit;
+  line-height: 1.125em;
+}
+
+/* Calendar tile (dates) */
+.react-calendar__tile {
+  height: 40px;
+  border-radius: 6px;
+  color: #ededed; /* Light text for dark background */
+  transition: background-color 0.3s ease;
+}
+
+/* Highlight on hover and active state */
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile--active {
+  background-color: #4f46e5; /* Indigo-600 */
+  color: white;
+}
+
+/* Disabled tile (e.g., dates from another month) */
+.react-calendar__tile--disabled {
+  color: #555555; /* Subdued gray for disabled dates */
+}
+
+/* Navigation buttons (prev/next month) */
+.react-calendar__navigation button {
+  background-color: #171717;
+  color: #ededed;
+  min-width: 44px;
+  border: none;
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.react-calendar__navigation button:hover {
+  background-color: #4f46e5;
+  color: white;
+}
+
+/* Header (e.g., month and year) */
+.react-calendar__navigation {
+  margin-bottom: 10px;
+}
+
+.react-calendar__navigation__label {
+  font-weight: bold;
+}
+
+/* Weekdays (Mon, Tue, etc.) */
+.react-calendar__month-view__weekdays {
+  color: #c0c0c0; /* Subtle gray for weekdays */
+}
+
+/* Adjust border and spacing */
+.react-calendar__month-view__days {
+  border-top: 1px solid #444444; /* Subtle border for better separation */
+}
