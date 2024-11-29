@@ -27,12 +27,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`flex ${inter.variable} ${ibmPlexSerif.variable}`}>
-        <Sidebar />
+        <Sidebar side="left" />
         <div className="flex flex-col w-[1040px] mt-10 mx-5">
           <NavBar />
           {children}
         </div>
-        <Sidebar />
+        <Sidebar side="right" />
       </body>
     </html>
   );

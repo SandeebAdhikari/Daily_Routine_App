@@ -17,4 +17,6 @@
 body {
   color: var(--foreground);
   background: var(--background);
+  @apply font-inter;
+  @apply font-ibm-plex-serif;
 }
