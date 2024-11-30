@@ -6,8 +6,8 @@ import DownArrow from "@/public/icons/Arrow_Down.svg";
 
 const NavBar = () => {
   return (
-    <div className="flex items-center h-[72px]  rounded-2xl  border-l border-r">
-      <div className="ml-8 flex gap-2">
+    <div className="flex items-center h-[72px] rounded-2xl">
+      <div className="ml-8  gap-2">
         <Image
           src={AddBell}
           alt="add bell icon"
