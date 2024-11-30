@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 
 import { routines } from "@/constants";
+import Link from "next/link";
 
 interface SidebarProps {
   side: "left" | "right";
@@ -41,7 +42,7 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
   return (
     <div className="w-[429px] flex flex-col items-center mx-5">
       {side === "left" && (
-        <>
+        <div className="w-full flex flex-col items-center ">
           <Image
             src="/icons/sa-favicon-black.svg"
             alt="logo"
@@ -49,18 +50,33 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
             height={200}
             className="invert"
           />
-          <h1 className="-mt-5 text-2xl text-center font-bold">
+          <h1 className="mt-5 w-full text-2xl text-center font-bold ">
             DAILY <span className="text-gray-500">ROUTINE</span>
           </h1>
-          <div className=" flex flex-col ">
-            <button className="w-[158px] h-[144px]">CALENDAR</button>
-            <button className="w-[158px] h-[144px]">TO-DO LIST</button>
-            <button className="w-[158px] h-[144px]">NOTEPAD</button>
+          <div className="mt-48 w-full flex flex-col gap-6">
+            <Link
+              href="/"
+              className="p-2 h-[44px] bg-black/30 text-center inline-flex justify-center items-center hover:bg-[#171717] hover:rounded-2xl border-b"
+            >
+              CALENDAR
+            </Link>
+            <Link
+              href="/routine"
+              className="p-2 h-[44px] bg-black/30 text-center inline-flex justify-center items-center hover:bg-[#171717] hover:rounded-2xl border-b"
+            >
+              WEEKLY-ROUTINE
+            </Link>
+            <Link
+              href="/notepad"
+              className="p-2 h-[44px] bg-black/30 text-center inline-flex justify-center items-center hover:bg-[#171717] hover:rounded-2xl border-b"
+            >
+              NOTEPAD
+            </Link>
           </div>
-        </>
+        </div>
       )}
       {side === "right" && (
-        <div className="mt-10 flex flex-col p-2 items-center">
+        <div className="mt-10">
           <div className=" rounded-md shadow-md align-middle bg-black/30">
             <Calendar
               onChange={(value) => value && setDate(value as Date)}
@@ -68,12 +84,11 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
               className="p-2 rounded-md flex flex-col items-center justify-center"
             />
           </div>
-          <h2 className="text-xl mt-4 font-bold text-center">
+          <h2 className="text-xl mt-4 font-bold text-center border-b">
             UPCOMING <span className="text-gray-500"> EVENTS</span>
           </h2>
 
           <div className="mt-4 w-full h-auto bg-black/30 overflow-auto no-scrollbar rounded-md">
-            <h3 className="text-lg font-bold text-gray-400 mb-2 text-center"></h3>
             {upcomingEvents.length > 0 ? (
               <ul className="p-2 text-sm text-gray-300">
                 {upcomingEvents.map((event, index) => (
@@ -103,7 +118,7 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
             )}
           </div>
 
-          <h2 className="text-xl mt-4 font-bold text-center">
+          <h2 className="text-xl mt-4 font-bold text-center border-b">
             {weekday.toUpperCase()}
             <span className="text-gray-500"> ROUTINE</span>
           </h2>

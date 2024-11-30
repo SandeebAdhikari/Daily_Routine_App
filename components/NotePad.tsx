@@ -9,7 +9,7 @@ const NotePad: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full bg-gray-800 text-white p-4">
+    <div className="relative w-full h-[825px] bg-black/30 rounded-2xl text-white p-4">
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}
@@ -19,7 +19,7 @@ const NotePad: React.FC = () => {
 
       <button
         onClick={handleSave}
-        className="absolute bottom-4 right-4 bg-blue-500 text-white px-6 py-3 rounded-md shadow-md hover:bg-blue-600"
+        className="absolute bottom-4 right-4 bg-[#171717] text-white px-6 py-3 rounded-md shadow-md hover:border"
       >
         Save
       </button>
