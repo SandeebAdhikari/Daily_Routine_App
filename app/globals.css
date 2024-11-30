@@ -22,7 +22,7 @@ body {
 }
 
 .react-calendar {
-  background-color: #171717;
+  background-color: rgba(0, 0, 0, 0.3);
   color: #ededed;
   border: none;
   border-radius: 8px;
@@ -40,7 +40,7 @@ body {
 /* Highlight on hover and active state */
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile--active {
-  background-color: #667085;
+  background-color: #171717;
   color: white;
   border-radius: 6px;
 }
@@ -50,7 +50,7 @@ body {
 }
 
 .react-calendar__navigation button {
-  background-color: #171717;
+  background-color: rgba(0, 0, 0, 0.3);
   color: #ededed;
   min-width: 44px;
   border-radius: 6px;
@@ -58,7 +58,7 @@ body {
 }
 
 .react-calendar__navigation button:hover {
-  background-color: #667085;
+  background-color: #171717;
   color: white;
 }
 
@@ -83,8 +83,8 @@ body {
 }
 
 .no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .list-items {
@@ -96,4 +96,10 @@ body {
   background: linear-gradient(to bottom, #171717 0%, #0a0a0a 50%, #0a0a0a 100%);
   width: 100%;
   height: 100%;
+}
+
+.glassmorphism {
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
 }

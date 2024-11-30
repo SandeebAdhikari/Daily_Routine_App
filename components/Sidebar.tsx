@@ -37,11 +37,11 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
       )}
       {side === "right" && (
         <div className="flex flex-col p-2 items-center">
-          <div className="mt-10 rounded-md shadow-md align-middle">
+          <div className=" rounded-md shadow-md align-middle bg-black/30">
             <Calendar
               onChange={(value) => value && setDate(value as Date)}
               value={date}
-              className="p-2 rounded-md flex flex-col items-center justify-center"
+              className="p-2 rounded-md flex flex-col items-center justify-center "
             />
           </div>
 
@@ -49,13 +49,13 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
             {weekday.toUpperCase()}
             <span className="text-gray-500"> ROUTINE</span>
           </h2>
-          <div className="mt-4 w-full h-[118px] bg-[#171717] overflow-auto no-scrollbar  rounded-md">
+          <div className="mt-4 w-full h-[118px] bg-black/30 overflow-auto no-scrollbar  rounded-md">
             {upcomingRoutines.length > 0 ? (
               <ul className="p-1 text-sm text-gray-300">
                 {upcomingRoutines.map((routine, index) => (
                   <li
                     key={index}
-                    className="flex justify-between p-1 hover:bg-gray-500 hover:rounded-md hover:scale-95 transition-transform ease-in"
+                    className="flex justify-between p-1 hover:bg-[#171717] hover:rounded-md hover:scale-95 transition-transform ease-in"
                   >
                     <span>{routine.time}</span>
                     <span>{routine.activity}</span>
