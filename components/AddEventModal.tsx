@@ -4,15 +4,7 @@ import React, { useState } from "react";
 interface AddEventModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (event: {
-    title: string;
-    date: string;
-    startTime: string;
-    endTime: string;
-    backgroundColor: string;
-    borderColor: string;
-    frequency: string;
-  }) => void;
+  onSave: (event: any) => void;
 }
 
 const AddEventModal: React.FC<AddEventModalProps> = ({
@@ -32,15 +24,47 @@ const AddEventModal: React.FC<AddEventModalProps> = ({
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
 
-    onSave({
+    if (startTime >= endTime) {
+      alert("End time must be after start time.");
+      return;
+    }
+
+    const newEvent = {
       title,
-      date,
-      startTime,
-      endTime,
       backgroundColor: color,
       borderColor: color,
-      frequency,
-    });
+    };
+
+    if (frequency === "once") {
+      onSave({
+        ...newEvent,
+        start: `${date}T${startTime}`,
+        end: `${date}T${endTime}`,
+      });
+    } else {
+      const durationHours =
+        parseInt(endTime.split(":")[0]) - parseInt(startTime.split(":")[0]);
+      const durationMinutes =
+        parseInt(endTime.split(":")[1]) - parseInt(startTime.split(":")[1]);
+      const duration = `PT${durationHours}H${durationMinutes}M`;
+
+      onSave({
+        ...newEvent,
+        rrule: {
+          freq: frequency.toUpperCase(),
+          dtstart: `${date}T${startTime}`,
+          until: `${date}T23:59:59`,
+        },
+        duration,
+      });
+    }
+
+    setTitle("");
+    setDate("");
+    setStartTime("");
+    setEndTime("");
+    setFrequency("once");
+    setColor("#3174ad");
 
     onClose();
   };
@@ -103,7 +127,6 @@ const AddEventModal: React.FC<AddEventModalProps> = ({
                   type="time"
                   value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
-                  placeholder="Select a date"
                   className="w-full bg-transparent p-2 border-b rounded outline-none hover:border"
                   required
                 />

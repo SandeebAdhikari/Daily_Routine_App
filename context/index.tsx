@@ -6,9 +6,9 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
-import { Frequency } from "rrule";
 
 interface Event {
+  id: string;
   title: string;
   date: string;
   startTime: string;
@@ -20,6 +20,7 @@ interface Event {
 
 interface EventContextType {
   addEvent: (event: Event) => void;
+  deleteEvent: (id: string) => void;
   currentEvents: Event[];
 }
 
@@ -48,24 +49,26 @@ export const EventProvider = ({ children }: EventProviderProps) => {
   }, []);
 
   const addEvent = (event: Event) => {
+    const id = new Date().getTime().toString(); // Generate a unique ID
     const updatedEvents = [
       ...currentEvents,
       {
-        title: event.title,
-        date: event.date,
-        startTime: event.startTime,
-        endTime: event.endTime,
-        backgroundColor: event.backgroundColor,
-        borderColor: event.borderColor,
-        frequency: event.frequency,
+        ...event,
+        id,
       },
     ];
     setCurrentEvents(updatedEvents);
     localStorage.setItem("events", JSON.stringify(updatedEvents));
   };
 
+  const deleteEvent = (id: string) => {
+    const updatedEvents = currentEvents.filter((event) => event.id !== id);
+    setCurrentEvents(updatedEvents);
+    localStorage.setItem("events", JSON.stringify(updatedEvents));
+  };
+
   return (
-    <EventContext.Provider value={{ addEvent, currentEvents }}>
+    <EventContext.Provider value={{ addEvent, deleteEvent, currentEvents }}>
       {children}
     </EventContext.Provider>
   );

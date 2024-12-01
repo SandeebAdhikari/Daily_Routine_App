@@ -6,8 +6,21 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { useEventContext } from "@/context";
 
+interface CalendarEvent extends Event {
+  id: string;
+}
+
 export default function Home() {
-  const { currentEvents } = useEventContext();
+  const { currentEvents, deleteEvent } = useEventContext();
+
+  const handleEventClick = (info: any) => {
+    const shouldDelete = confirm(
+      `Do you want to delete the event: ${info.event.title}?`
+    );
+    if (shouldDelete) {
+      deleteEvent(info.event.id);
+    }
+  };
 
   return (
     <div className="flex flex-col items-center min-h-screen">
@@ -15,10 +28,10 @@ export default function Home() {
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
-          events={currentEvents} // Use events from context
+          events={currentEvents}
           editable={true}
           selectable={true}
-          eventClick={(info) => alert(`Event: ${info.event.title}`)}
+          eventClick={handleEventClick}
           headerToolbar={{
             left: "prev,next today",
             center: "title",
