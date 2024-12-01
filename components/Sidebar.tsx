@@ -3,8 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Calendar from "react-calendar";
 import Link from "next/link";
-import { useEventContext } from "@/context";
-import { routines } from "@/constants";
+import { useEventContext, useRoutineContext } from "@/context";
 
 interface SidebarProps {
   side: "left" | "right";
@@ -13,14 +12,25 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ side }) => {
   const [date, setDate] = useState(new Date());
   const { currentEvents } = useEventContext();
+  const { currentRoutines } = useRoutineContext();
 
   const weekday = new Date()
     .toLocaleDateString("en-US", { weekday: "long" })
-    .toUpperCase() as keyof typeof routines;
+    .toUpperCase();
+
   const currentTime = new Date().toTimeString().slice(0, 5);
 
-  const upcomingRoutines =
-    routines[weekday]?.filter((routine) => routine.time > currentTime) || [];
+  const todayRoutines = currentRoutines.filter(
+    (routine) => routine.weekdays.toUpperCase() === weekday
+  );
+
+  const upcomingRoutines = todayRoutines
+    .filter((routine) => routine.startTime > currentTime)
+    .sort((a, b) => {
+      const timeA = new Date(`1970-01-01T${a.startTime}`).getTime();
+      const timeB = new Date(`1970-01-01T${b.startTime}`).getTime();
+      return timeA - timeB;
+    });
 
   const upcomingEvents = currentEvents.filter((event) => {
     if (!event.start) {
@@ -28,16 +38,12 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
       return false;
     }
     const eventDateTime = new Date(event.start);
-    console.log("Event DateTime:", eventDateTime);
     return eventDateTime > new Date();
   });
 
-  console.log("Filtered Upcoming Events:", upcomingEvents);
-
-  console.log("Filtered Upcoming Events:", upcomingEvents);
-
   return (
     <div className="w-[429px] flex flex-col items-center mx-5">
+      {/* Left Sidebar */}
       {side === "left" && (
         <div className="w-full flex flex-col items-center">
           <Image
@@ -72,6 +78,8 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
           </div>
         </div>
       )}
+
+      {/* Right Sidebar */}
       {side === "right" && (
         <div className="mt-10">
           <div className="rounded-md shadow-md align-middle bg-black/30">
@@ -82,6 +90,7 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
             />
           </div>
 
+          {/* Upcoming Events Section */}
           <h2 className="text-xl mt-4 font-bold text-center border-b">
             UPCOMING <span className="text-gray-500">EVENTS</span>
           </h2>
@@ -122,9 +131,9 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
             )}
           </div>
 
+          {/* Today's Routines Section */}
           <h2 className="text-xl mt-4 font-bold text-center border-b">
-            {weekday.toUpperCase()}
-            <span className="text-gray-500"> ROUTINE</span>
+            {weekday} <span className="text-gray-500">ROUTINE</span>
           </h2>
           <div className="mt-4 w-full h-auto bg-black/30 overflow-auto no-scrollbar rounded-md">
             {upcomingRoutines.length > 0 ? (
@@ -134,8 +143,8 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
                     key={index}
                     className="flex justify-between p-1 hover:bg-[#171717] hover:rounded-md hover:scale-95 transition-transform ease-in"
                   >
-                    <span>{routine.time}</span>
-                    <span>{routine.activity}</span>
+                    <span>{routine.startTime}</span>
+                    <span>{routine.title}</span>
                   </li>
                 ))}
               </ul>

@@ -36,9 +36,14 @@ const Routine = () => {
   return (
     <div className="relative mt-10 w-full h-full">
       {weekdays.map((weekday) => {
-        const filteredRoutines = currentRoutines.filter(
-          (routine) => routine.weekdays === weekday
-        );
+        const filteredRoutines = currentRoutines
+          .filter((routine) => routine.weekdays === weekday)
+          .sort((a, b) => {
+            const timeA = new Date(`1970-01-01T${a.startTime}:00`).getTime();
+            const timeB = new Date(`1970-01-01T${b.startTime}:00`).getTime();
+            return timeA - timeB;
+          });
+
         return (
           <div key={weekday} className="mb-6">
             <h1 className="text-3xl font-bold mb-4">{weekday.toUpperCase()}</h1>
