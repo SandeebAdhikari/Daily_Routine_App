@@ -42,7 +42,7 @@ const Routine = () => {
         return (
           <div key={weekday} className="mb-6">
             <h1 className="text-3xl font-bold mb-4">{weekday.toUpperCase()}</h1>
-            <div className="grid grid-cols-1 gap-4">
+            <div className="flex gap-4">
               {!filteredRoutines.length ? (
                 <p>No routines for {weekday}!</p>
               ) : (

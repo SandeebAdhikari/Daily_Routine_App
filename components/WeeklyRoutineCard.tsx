@@ -50,19 +50,18 @@ const WeeklyRoutineCard: React.FC<WeeklyRoutineCardProps> = ({
   return (
     <>
       <div
-        className="w-[475px] h-[151px] p-8 rounded-2xl bg-black/30 cursor-pointer hover:bg-black/40 transition-all  shadow-sm shadow-white"
+        className="w-[175px] h-[151px] p-8 rounded-2xl bg-black/30 cursor-pointer hover:bg-black/40 transition-all  shadow-sm shadow-white hover:scale-105"
         onClick={openViewModal}
       >
-        <div className="flex w-full justify-between translate-y-5">
+        <div className="flex flex-col items-center justify-center hover:scale-105">
           <h1 className="text-[18px] font-bold hover:underline">
             {routine.title.toUpperCase()}
           </h1>
-          <div className="flex flex-col">
-            <p className="text-[16px] font-semibold">{routine.weekdays}</p>
-            <p className="text-[14px]">
-              {routine.startTime} - {routine.endTime}
-            </p>
-          </div>
+
+          <p className="text-[16px] font-semibold">{routine.weekdays}</p>
+          <p className="text-[14px]">
+            {routine.startTime} - {routine.endTime}
+          </p>
         </div>
       </div>
 
