@@ -97,6 +97,11 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
                     <span className="font-semibold">
                       {event.title.toUpperCase()}
                     </span>
+                    <span>
+                      {new Date(event.start).toLocaleDateString([], {
+                        dateStyle: "long",
+                      })}
+                    </span>
                     <span className="text-gray-400 text-xs">
                       {new Date(event.start).toLocaleTimeString([], {
                         hour: "2-digit",

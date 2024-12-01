@@ -1,77 +1,69 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface AddEventModalProps {
   isOpen: boolean;
   onClose: () => void;
   onSave: (event: any) => void;
+  initialEventData?: {
+    title: string;
+    date: string;
+    start: string;
+    endTime: string;
+    frequency: string;
+    backgroundColor: string;
+  };
 }
 
 const AddEventModal: React.FC<AddEventModalProps> = ({
   isOpen,
   onClose,
   onSave,
+  initialEventData,
 }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [start, setStartTime] = useState("");
-  const [end, setEndTime] = useState("");
+  const [endTime, setEndTime] = useState("");
   const [frequency, setFrequency] = useState("once");
   const [color, setColor] = useState("#3174ad");
+
+  useEffect(() => {
+    if (initialEventData) {
+      setTitle(initialEventData.title);
+      setDate(initialEventData.date);
+      setStartTime(initialEventData.start);
+      setEndTime(initialEventData.endTime);
+      setFrequency(initialEventData.frequency);
+      setColor(initialEventData.backgroundColor);
+    }
+  }, [initialEventData]);
 
   if (!isOpen) return null;
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (start >= end) {
-      alert("End time must be after start time.");
-      return;
-    }
-
     const newEvent = {
       title,
+      date,
+      start: `${date}T${start}`,
+      end: `${date}T${endTime}`,
       backgroundColor: color,
+      borderColor: color,
+      frequency,
     };
 
-    if (frequency === "once") {
-      onSave({
-        ...newEvent,
-        start: `${date}T${start}`,
-        end: `${date}T${end}`,
-      });
-    } else {
-      const durationHours =
-        parseInt(end.split(":")[0]) - parseInt(start.split(":")[0]);
-      const durationMinutes =
-        parseInt(end.split(":")[1]) - parseInt(start.split(":")[1]);
-      const duration = `PT${durationHours}H${durationMinutes}M`;
-
-      onSave({
-        ...newEvent,
-        rrule: {
-          freq: frequency.toUpperCase(),
-          dtstart: `${date}T${start}`,
-          until: `${date}T23:59:59`,
-        },
-        duration,
-      });
-    }
-
-    setTitle("");
-    setDate("");
-    setStartTime("");
-    setEndTime("");
-    setFrequency("once");
-    setColor("#3174ad");
-
+    onSave(newEvent);
     onClose();
   };
 
   return (
     <div className="fixed inset-0 bg-[#171717]/85 flex items-center justify-center z-50">
       <div className="bg-black p-6 rounded-lg shadow-lg w-[400px]">
-        <h2 className="text-lg font-bold mb-4">Add Event</h2>
+        <h2 className="text-lg font-bold mb-4">
+          {initialEventData ? "Edit Event" : "Add Event"}
+        </h2>
         <form onSubmit={handleSave}>
           <div className="mb-4">
             <label htmlFor="event-title" className="block font-semibold mb-2">
@@ -124,7 +116,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({
                 <input
                   id="event-to"
                   type="time"
-                  value={end}
+                  value={endTime}
                   onChange={(e) => setEndTime(e.target.value)}
                   className="w-full bg-transparent p-2 border-b rounded outline-none hover:border"
                   required
@@ -153,7 +145,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({
               htmlFor="event-color"
               className="mt-2 block font-semibold mb-2"
             >
-              Background Color
+              Color
             </label>
             <input
               id="event-color"

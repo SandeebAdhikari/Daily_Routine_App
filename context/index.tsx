@@ -21,6 +21,7 @@ interface Event {
 interface EventContextType {
   addEvent: (event: Event) => void;
   deleteEvent: (id: string) => void;
+  editEvent: (updatedEvent: Event) => void;
   currentEvents: Event[];
 }
 
@@ -67,8 +68,18 @@ export const EventProvider = ({ children }: EventProviderProps) => {
     localStorage.setItem("events", JSON.stringify(updatedEvents));
   };
 
+  const editEvent = (updatedEvent: Event) => {
+    const updatedEvents = currentEvents.map((event) =>
+      event.id === updatedEvent.id ? updatedEvent : event
+    );
+    setCurrentEvents(updatedEvents);
+    localStorage.setItem("events", JSON.stringify(updatedEvents));
+  };
+
   return (
-    <EventContext.Provider value={{ addEvent, deleteEvent, currentEvents }}>
+    <EventContext.Provider
+      value={{ addEvent, deleteEvent, editEvent, currentEvents }}
+    >
       {children}
     </EventContext.Provider>
   );
