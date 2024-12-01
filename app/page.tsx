@@ -13,8 +13,6 @@ export default function Home() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const handleEventClick = (info: any) => {
-    console.log("Event Info:", info.event);
-
     const startDate = info.event.start ? new Date(info.event.start) : null;
     const endDate = info.event.end ? new Date(info.event.end) : null;
 

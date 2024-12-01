@@ -107,7 +107,7 @@ const WeeklyRoutineCard: React.FC<WeeklyRoutineCardProps> = ({
           isOpen={isEditModalOpen}
           onClose={closeEditModal}
           onSave={handleSave}
-          initialEventData={routine}
+          initialRoutineData={routine}
         />
       )}
     </>

@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 
 import { useEventContext } from "@/context";
+import { useRoutineContext } from "@/context";
 import CalendarAdd from "@/public/icons/Calendar_Add.svg";
 import Schedule from "@/public/icons/schedule.svg";
 import IconAdd from "@/public/icons/add_circle.svg";
@@ -14,6 +15,7 @@ const NavBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalIOpen, setIsModalIOpen] = useState(false);
   const { addEvent } = useEventContext();
+  const { addRoutine } = useRoutineContext();
   const router = useRouter();
   const pathname = usePathname();
 
@@ -39,8 +41,8 @@ const NavBar = () => {
     setIsModalOpen(false);
   };
 
-  const handleISave = (event: any) => {
-    addEvent({ ...event });
+  const handleRoutineSave = (routine: any) => {
+    addRoutine({ ...routine });
     setIsModalIOpen(false);
   };
 
@@ -71,7 +73,7 @@ const NavBar = () => {
       <AddRoutineModal
         isOpen={isModalIOpen}
         onClose={closeIModal}
-        onSave={handleISave}
+        onSave={handleRoutineSave}
       />
     </div>
   );

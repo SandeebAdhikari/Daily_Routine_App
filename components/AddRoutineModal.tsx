@@ -18,7 +18,7 @@ interface AddRoutineModalProps {
     startTime: string;
     endTime: string;
   }) => void;
-  initialEventData?: {
+  initialRoutineData?: {
     title: string;
     date: string;
     startTime: string;
@@ -30,7 +30,7 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
   isOpen,
   onClose,
   onSave,
-  initialEventData,
+  initialRoutineData,
 }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
@@ -38,18 +38,18 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
   const [endTime, setEndTime] = useState("");
 
   useEffect(() => {
-    if (initialEventData) {
-      setTitle(initialEventData.title || "");
-      setDate(initialEventData.date || "");
-      setStartTime(initialEventData.startTime || "");
-      setEndTime(initialEventData.endTime || "");
+    if (initialRoutineData) {
+      setTitle(initialRoutineData.title || "");
+      setDate(initialRoutineData.date || "");
+      setStartTime(initialRoutineData.startTime || "");
+      setEndTime(initialRoutineData.endTime || "");
     } else {
       setTitle("");
       setDate("");
       setStartTime("");
       setEndTime("");
     }
-  }, [initialEventData]);
+  }, [initialRoutineData]);
 
   if (!isOpen) return null;
 
@@ -73,7 +73,7 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
       <div className="fixed inset-0 bg-[#171717]/85 flex items-center justify-center z-50">
         <div className="bg-black p-6 rounded-lg shadow-lg w-[400px]">
           <h2 className="text-lg font-bold mb-4">
-            {initialEventData ? "Edit Routine" : "Add Routine"}
+            {initialRoutineData ? "Edit Routine" : "Add Routine"}
           </h2>
           <form onSubmit={handleSave}>
             <div className="mb-4">
