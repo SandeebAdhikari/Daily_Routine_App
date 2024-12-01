@@ -58,20 +58,38 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
           <div className="mt-48 w-full flex flex-col gap-6">
             <Link
               href="/"
-              className="p-2 h-[44px] bg-black/30 text-center inline-flex justify-center items-center hover:bg-[#171717] hover:rounded-2xl border-b"
+              className="p-2  h-[44px] bg-black/30 text-center inline-flex gap-2 justify-center items-center hover:bg-[#171717] hover:rounded-2xl border-b"
             >
+              <Image
+                src="/icons/Calendar.svg"
+                alt="calendar"
+                width={20}
+                height={20}
+              />
               CALENDAR
             </Link>
             <Link
               href="/routine"
-              className="p-2 h-[44px] bg-black/30 text-center inline-flex justify-center items-center hover:bg-[#171717] hover:rounded-2xl border-b"
+              className="p-2 h-[44px] bg-black/30 text-center inline-flex gap-2 justify-center items-center hover:bg-[#171717] hover:rounded-2xl border-b"
             >
+              <Image
+                src="/icons/Schedule.svg"
+                alt="schedule"
+                width={20}
+                height={20}
+              />
               WEEKLY-ROUTINE
             </Link>
             <Link
               href="/notepad"
-              className="p-2 h-[44px] bg-black/30 text-center inline-flex justify-center items-center hover:bg-[#171717] hover:rounded-2xl border-b"
+              className="p-2 h-[44px] bg-black/30 text-center inline-flex gap-2 justify-center items-center hover:bg-[#171717] hover:rounded-2xl border-b"
             >
+              <Image
+                src="/icons/Note.svg"
+                alt="notepad"
+                width={20}
+                height={20}
+              />
               NOTEPAD
             </Link>
           </div>
