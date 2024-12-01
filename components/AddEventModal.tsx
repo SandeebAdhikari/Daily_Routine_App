@@ -15,7 +15,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [start, setStartTime] = useState("");
-  const [endTime, setEndTime] = useState("");
+  const [end, setEndTime] = useState("");
   const [frequency, setFrequency] = useState("once");
   const [color, setColor] = useState("#3174ad");
 
@@ -24,7 +24,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (start >= endTime) {
+    if (start >= end) {
       alert("End time must be after start time.");
       return;
     }
@@ -38,13 +38,13 @@ const AddEventModal: React.FC<AddEventModalProps> = ({
       onSave({
         ...newEvent,
         start: `${date}T${start}`,
-        end: `${date}T${endTime}`,
+        end: `${date}T${end}`,
       });
     } else {
       const durationHours =
-        parseInt(endTime.split(":")[0]) - parseInt(start.split(":")[0]);
+        parseInt(end.split(":")[0]) - parseInt(start.split(":")[0]);
       const durationMinutes =
-        parseInt(endTime.split(":")[1]) - parseInt(start.split(":")[1]);
+        parseInt(end.split(":")[1]) - parseInt(start.split(":")[1]);
       const duration = `PT${durationHours}H${durationMinutes}M`;
 
       onSave({
@@ -124,7 +124,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({
                 <input
                   id="event-to"
                   type="time"
-                  value={endTime}
+                  value={end}
                   onChange={(e) => setEndTime(e.target.value)}
                   className="w-full bg-transparent p-2 border-b rounded outline-none hover:border"
                   required

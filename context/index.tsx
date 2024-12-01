@@ -12,7 +12,7 @@ interface Event {
   title: string;
   date: string;
   start: string;
-  endTime: string;
+  end: string;
   backgroundColor: string;
   borderColor: string;
   frequency: string;

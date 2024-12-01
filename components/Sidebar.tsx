@@ -94,15 +94,16 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
                     key={index}
                     className="flex flex-col p-2 hover:bg-[#171717] hover:rounded-md hover:scale-95 transition-transform ease-in"
                   >
-                    <span className="font-semibold">{event.title}</span>
+                    <span className="font-semibold">
+                      {event.title.toUpperCase()}
+                    </span>
                     <span className="text-gray-400 text-xs">
-                      {new Date(event.start).toLocaleDateString()}{" "}
                       {new Date(event.start).toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
                       })}
                       {" - "}
-                      {new Date(event.endTime).toLocaleTimeString([], {
+                      {new Date(event.end).toLocaleTimeString([], {
                         hour: "2-digit",
                         minute: "2-digit",
                       })}
