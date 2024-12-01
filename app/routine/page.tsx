@@ -71,7 +71,7 @@ const Routine = () => {
   }, [currentRoutines]);
 
   return (
-    <div className="relative mt-10 w-full h-full">
+    <div className="relative mt-10 h-[800px] overflow-scroll no-scrollbar">
       {weekdays.map((weekday) => {
         const filteredRoutines = currentRoutines
           .filter((routine) => routine.weekdays === weekday)

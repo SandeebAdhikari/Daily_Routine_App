@@ -57,8 +57,8 @@ export default function Home() {
   };
 
   return (
-    <div className="mt-10 flex flex-col items-center min-h-screen">
-      <div className="rounded-lg overflow-visible w-full h-[800px]">
+    <div className="mt-10 flex flex-col items-center h-[800px] overflow-hidden">
+      <div className="rounded-lg overflow-visible w-full h-full ">
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
