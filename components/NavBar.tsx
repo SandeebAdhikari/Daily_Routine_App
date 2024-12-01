@@ -2,12 +2,14 @@
 import { useRouter, usePathname } from "next/navigation";
 import Image from "next/image";
 import React, { useState } from "react";
-
 import { useEventContext } from "@/context";
 import { useRoutineContext } from "@/context";
+
 import CalendarAdd from "@/public/icons/Calendar_Add.svg";
 import Schedule from "@/public/icons/schedule.svg";
 import IconAdd from "@/public/icons/add_circle.svg";
+import NotePad from "@/public/icons/Note.svg";
+
 import AddEventModal from "@/components/AddEventModal";
 import AddRoutineModal from "./AddRoutineModal";
 
@@ -31,6 +33,12 @@ const NavBar = () => {
       router.push("/routine");
     }
     setIsModalIOpen(true);
+  };
+
+  const handleNoteClick = () => {
+    if (pathname !== "/notepad") {
+      router.push("/notepad");
+    }
   };
 
   const closeModal = () => setIsModalOpen(false);
@@ -74,6 +82,14 @@ const NavBar = () => {
         isOpen={isModalIOpen}
         onClose={closeIModal}
         onSave={handleRoutineSave}
+      />
+      <Image
+        src={NotePad}
+        alt="add"
+        width={40}
+        height={40}
+        className="cursor-pointer hover:scale-105"
+        onClick={handleNoteClick}
       />
     </div>
   );

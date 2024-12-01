@@ -43,7 +43,6 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
 
   return (
     <div className="w-[429px] flex flex-col items-center mx-5">
-      {/* Left Sidebar */}
       {side === "left" && (
         <div className="w-full flex flex-col items-center">
           <Image
@@ -79,7 +78,6 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
         </div>
       )}
 
-      {/* Right Sidebar */}
       {side === "right" && (
         <div className="mt-10">
           <div className="rounded-md shadow-md align-middle bg-black/30">
@@ -90,7 +88,6 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
             />
           </div>
 
-          {/* Upcoming Events Section */}
           <h2 className="text-xl mt-4 font-bold text-center border-b">
             UPCOMING <span className="text-gray-500">EVENTS</span>
           </h2>
@@ -131,7 +128,6 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
             )}
           </div>
 
-          {/* Today's Routines Section */}
           <h2 className="text-xl mt-4 font-bold text-center border-b">
             {weekday} <span className="text-gray-500">ROUTINE</span>
           </h2>
@@ -154,6 +150,9 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
               </p>
             )}
           </div>
+          <h2 className="text-xl mt-4 font-bold text-center border-b">
+            NOTEPAD <span className="text-gray-500">FILES</span>
+          </h2>
         </div>
       )}
     </div>
