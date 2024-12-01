@@ -1,8 +1,8 @@
 # Daily Routine App
 
-** CALENDAR **
+**CALENDAR**
 ![preview 1](/public/images/1.png)
-** ROUTINE **
+**ROUTINE**
 ![preview 1](/public/images/2.png)
-** NOTES **
+**NOTES**
 ![preview 1](/public/images/3.png)
