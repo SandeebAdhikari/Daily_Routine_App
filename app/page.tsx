@@ -1,48 +1,21 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-
-const events = [
-  {
-    title: "Team Meeting",
-    start: "2024-12-30T10:00:00", // ISO format for December 30, 2024, 10:00 AM
-    end: "2024-12-30T11:30:00", // ISO format for December 30, 2024, 11:30 AM
-  },
-  {
-    title: "Lunch Break",
-    start: "2024-12-30T13:00:00", // ISO format for December 30, 2024, 1:00 PM
-    end: "2024-12-30T14:00:00", // ISO format for December 30, 2024, 2:00 PM
-  },
-];
+import { useEventContext } from "@/context";
 
 export default function Home() {
-  const [currentEvents, setCurrentEvents] = useState(events);
-
-  const handleDateClick = (info: any) => {
-    const title = prompt("Enter event title:");
-    if (title) {
-      setCurrentEvents([
-        ...currentEvents,
-        {
-          title,
-          start: info.dateStr,
-          end: info.dateStr,
-        },
-      ]);
-    }
-  };
+  const { currentEvents } = useEventContext();
 
   return (
-    <div className="flex flex-col items-center min-h-screen mt-10">
+    <div className="flex flex-col items-center min-h-screen">
       <div className="rounded-lg overflow-visible w-full h-[800px]">
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
-          events={currentEvents}
-          dateClick={handleDateClick}
+          events={currentEvents} // Use events from context
           editable={true}
           selectable={true}
           eventClick={(info) => alert(`Event: ${info.event.title}`)}
