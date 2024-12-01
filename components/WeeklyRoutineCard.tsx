@@ -6,7 +6,6 @@ import AddRoutineModal from "@/components/AddRoutineModal";
 interface Routine {
   id: string;
   title: string;
-  date: string;
   startTime: string;
   endTime: string;
   weekdays: string;
@@ -14,7 +13,9 @@ interface Routine {
 
 interface WeeklyRoutineCardProps {
   routine: Routine;
+
   onDeleteRoutine: (id: string) => void;
+
   onEditRoutine: (updatedRoutine: Routine) => void;
 }
 
@@ -49,18 +50,19 @@ const WeeklyRoutineCard: React.FC<WeeklyRoutineCardProps> = ({
   return (
     <>
       <div
-        className="w-full p-8 h-[151px] rounded-2xl bg-black/30 cursor-pointer hover:bg-black/40 transition-all  shadow-sm shadow-white"
+        className="w-[475px] h-[151px] p-8 rounded-2xl bg-black/30 cursor-pointer hover:bg-black/40 transition-all  shadow-sm shadow-white"
         onClick={openViewModal}
       >
-        <div className="flex flex-col">
+        <div className="flex w-full justify-between translate-y-5">
           <h1 className="text-[18px] font-bold hover:underline">
             {routine.title.toUpperCase()}
           </h1>
-          <h2 className="text-[16px]">{routine.date}</h2>
-          <p className="mt-1 text-[14px]">
-            {routine.startTime} - {routine.endTime}
-          </p>
-          <p className="mt-1 text-[14px]">{routine.weekdays}</p>
+          <div className="flex flex-col">
+            <p className="text-[16px] font-semibold">{routine.weekdays}</p>
+            <p className="text-[14px]">
+              {routine.startTime} - {routine.endTime}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -80,9 +82,11 @@ const WeeklyRoutineCard: React.FC<WeeklyRoutineCardProps> = ({
                 {routine.title.toUpperCase()}
               </h2>
               <p>
-                <strong>Start:</strong> {routine.date} {routine.startTime}
+                <strong>Weekday:</strong> {routine.weekdays}
                 <br />
-                <strong>End:</strong> {routine.date} {routine.endTime}
+                <strong>Start:</strong> {routine.startTime}
+                <br />
+                <strong>End:</strong> {routine.endTime}
               </p>
             </div>
 

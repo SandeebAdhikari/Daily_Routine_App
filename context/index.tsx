@@ -89,7 +89,6 @@ export const EventProvider = ({ children }: EventProviderProps) => {
 export interface Routine {
   id: string;
   title: string;
-  date: string;
   startTime: string;
   endTime: string;
   weekdays: string;

@@ -16,7 +16,6 @@ interface AddRoutineModalProps {
   onSave: (routine: any) => void;
   initialRoutineData?: {
     title: string;
-    date: string;
     startTime: string;
     endTime: string;
     weekdays: string;
@@ -30,7 +29,6 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
   initialRoutineData,
 }) => {
   const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [weekdays, setWeekdays] = useState("");
@@ -38,7 +36,6 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
   useEffect(() => {
     if (initialRoutineData) {
       setTitle(initialRoutineData.title);
-      setDate(initialRoutineData.date);
       setStartTime(initialRoutineData.startTime);
       setEndTime(initialRoutineData.endTime);
       setWeekdays(initialRoutineData.weekdays);
@@ -49,7 +46,6 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
 
   const handleClose = () => {
     setTitle("");
-    setDate("");
     setStartTime("");
     setEndTime("");
     setWeekdays("");
@@ -62,7 +58,6 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
     const newRoutine = {
       id: Date.now().toString(),
       title,
-      date,
       startTime,
       endTime,
       weekdays,
@@ -91,20 +86,6 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
                 onChange={(e) => setTitle(e.target.value)}
                 className="w-full bg-transparent p-2 border-b rounded outline-none hover:border"
                 placeholder="Enter event title"
-                required
-              />
-              <label
-                htmlFor="event-date"
-                className="mt-2 block font-semibold mb-2"
-              >
-                Date
-              </label>
-              <input
-                id="event-date"
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                className="w-full bg-transparent p-2 border-b rounded outline-none hover:border"
                 required
               />
               <div className="flex w-full gap-2 mt-2">

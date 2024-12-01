@@ -22,7 +22,7 @@ const WeekdayInput: React.FC<WeekdayInputProps> = ({ setWeekdays }) => {
       </label>
       <select
         id="weekday-select"
-        defaultValue="Monday"
+        defaultValue=""
         onChange={(e) => setWeekdays(e.target.value)}
         className="w-full bg-transparent p-1 border-b rounded outline-none hover:border"
       >
