@@ -11,13 +11,7 @@ interface Routine {
 interface AddRoutineModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (routine: {
-    id: string;
-    title: string;
-    date: string;
-    startTime: string;
-    endTime: string;
-  }) => void;
+  onSave: (routine: any) => void;
   initialRoutineData?: {
     title: string;
     date: string;
@@ -39,19 +33,22 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
 
   useEffect(() => {
     if (initialRoutineData) {
-      setTitle(initialRoutineData.title || "");
-      setDate(initialRoutineData.date || "");
-      setStartTime(initialRoutineData.startTime || "");
-      setEndTime(initialRoutineData.endTime || "");
-    } else {
-      setTitle("");
-      setDate("");
-      setStartTime("");
-      setEndTime("");
+      setTitle(initialRoutineData.title);
+      setDate(initialRoutineData.date);
+      setStartTime(initialRoutineData.startTime);
+      setEndTime(initialRoutineData.endTime);
     }
   }, [initialRoutineData]);
 
   if (!isOpen) return null;
+
+  const handleClose = () => {
+    setTitle("");
+    setDate("");
+    setStartTime("");
+    setEndTime("");
+    onClose();
+  };
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,7 +62,7 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
     };
 
     onSave(newRoutine);
-    onClose();
+    handleClose();
   };
 
   return (
@@ -141,7 +138,7 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
             <div className="flex justify-end">
               <button
                 type="button"
-                onClick={onClose}
+                onClick={handleClose}
                 className="mr-2 px-4 py-2 border rounded hover:bg-[#171717] hover:scale-105"
               >
                 Cancel

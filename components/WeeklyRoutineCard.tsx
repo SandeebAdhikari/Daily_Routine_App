@@ -47,7 +47,6 @@ const WeeklyRoutineCard: React.FC<WeeklyRoutineCardProps> = ({
 
   return (
     <>
-      {/* Weekly Routine Card */}
       <div
         className="w-full p-8 h-[151px] rounded-2xl bg-black/30 cursor-pointer hover:bg-black/40 transition-all"
         onClick={openViewModal}
