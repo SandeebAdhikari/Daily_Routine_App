@@ -74,7 +74,6 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
       )}
       {side === "right" && (
         <div className="mt-10">
-          {/* Calendar Component */}
           <div className="rounded-md shadow-md align-middle bg-black/30">
             <Calendar
               onChange={(value) => value && setDate(value as Date)}

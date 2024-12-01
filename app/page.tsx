@@ -77,11 +77,9 @@ export default function Home() {
         />
       </div>
 
-      {/* Event Details Modal */}
       {selectedEvent && !isEditModalOpen && (
         <div className="fixed inset-0 bg-[#171717]/85 flex items-center justify-center z-50">
           <div className="bg-black p-6 rounded-lg shadow-lg w-[400px] relative">
-            {/* Close Button */}
             <button
               onClick={closeModal}
               className="absolute top-2 right-2 text-gray-400 hover:text-white hover:bg-[#171717] p-2 rounded-full transition-all"
@@ -133,7 +131,6 @@ export default function Home() {
         </div>
       )}
 
-      {/* Add/Edit Event Modal */}
       {isEditModalOpen && (
         <AddEventModal
           isOpen={isEditModalOpen}

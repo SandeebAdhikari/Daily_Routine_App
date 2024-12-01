@@ -1,13 +1,24 @@
 "use client";
 
-import React from "react";
+import WeeklyRoutineCard from "@/components/WeeklyRoutineCard";
+import React, { useEffect, useState } from "react";
 
-const page = () => {
+const Page = () => {
+  const [currentDate, setCurrentDate] = useState("");
+
+  useEffect(() => {
+    setCurrentDate(new Date().toISOString());
+  }, []);
+
+  if (!currentDate) {
+    return null;
+  }
+
   return (
-    <div className="relative mt-10 w-full h-full ">
-      <div className="bg-black/30 inset-0 absolute rounded-2xl"></div>
+    <div className="relative mt-10 w-full h-full">
+      <WeeklyRoutineCard date={currentDate} start="08:00 AM" />
     </div>
   );
 };
 
-export default page;
+export default Page;
