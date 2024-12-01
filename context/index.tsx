@@ -92,6 +92,7 @@ export interface Routine {
   date: string;
   startTime: string;
   endTime: string;
+  weekdays: string;
 }
 
 interface RoutineContextType {

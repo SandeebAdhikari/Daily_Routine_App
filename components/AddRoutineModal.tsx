@@ -7,6 +7,7 @@ interface Routine {
   date: string;
   startTime: string;
   endTime: string;
+  weekdays: string;
 }
 
 interface AddRoutineModalProps {
@@ -18,6 +19,7 @@ interface AddRoutineModalProps {
     date: string;
     startTime: string;
     endTime: string;
+    weekdays: string;
   };
 }
 
@@ -31,6 +33,7 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
   const [date, setDate] = useState("");
   const [startTime, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
+  const [weekdays, setWeekdays] = useState("");
 
   useEffect(() => {
     if (initialRoutineData) {
@@ -38,6 +41,7 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
       setDate(initialRoutineData.date);
       setStartTime(initialRoutineData.startTime);
       setEndTime(initialRoutineData.endTime);
+      setWeekdays(initialRoutineData.weekdays);
     }
   }, [initialRoutineData]);
 
@@ -48,6 +52,7 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
     setDate("");
     setStartTime("");
     setEndTime("");
+    setWeekdays("");
     onClose();
   };
 
@@ -60,6 +65,7 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
       date,
       startTime,
       endTime,
+      weekdays,
     };
 
     onSave(newRoutine);
@@ -135,8 +141,7 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
                   />
                 </div>
               </div>
-
-              <WeekdayInput />
+              <WeekdayInput setWeekdays={setWeekdays} />
             </div>
             <div className="flex justify-end">
               <button

@@ -9,6 +9,7 @@ interface Routine {
   date: string;
   startTime: string;
   endTime: string;
+  weekdays: string;
 }
 
 interface WeeklyRoutineCardProps {
@@ -59,6 +60,7 @@ const WeeklyRoutineCard: React.FC<WeeklyRoutineCardProps> = ({
           <p className="mt-1 text-[14px]">
             {routine.startTime} - {routine.endTime}
           </p>
+          <p className="mt-1 text-[14px]">{routine.weekdays}</p>
         </div>
       </div>
 

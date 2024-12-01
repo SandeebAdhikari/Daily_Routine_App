@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 
-const WeekdayInput = () => {
-  const [selectedDay, setSelectedDay] = useState("Monday");
+interface WeekdayInputProps {
+  setWeekdays: React.Dispatch<React.SetStateAction<string>>;
+}
 
+const WeekdayInput: React.FC<WeekdayInputProps> = ({ setWeekdays }) => {
   const weekdays = [
     "Sunday",
     "Monday",
@@ -13,10 +15,6 @@ const WeekdayInput = () => {
     "Saturday",
   ];
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedDay(e.target.value);
-  };
-
   return (
     <div className="mt-2 flex flex-col gap-4">
       <label htmlFor="weekday-select" className="font-bold">
@@ -24,8 +22,8 @@ const WeekdayInput = () => {
       </label>
       <select
         id="weekday-select"
-        value={selectedDay}
-        onChange={handleChange}
+        defaultValue="Monday"
+        onChange={(e) => setWeekdays(e.target.value)}
         className="w-full bg-transparent p-1 border-b rounded outline-none hover:border"
       >
         {weekdays.map((day) => (

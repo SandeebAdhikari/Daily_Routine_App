@@ -17,6 +17,7 @@ const Routine = () => {
     date: string;
     startTime: string;
     endTime: string;
+    weekdays: string;
   }) => {
     addRoutine(routine);
     closeAddModal();
