@@ -8,9 +8,11 @@ import CalendarAdd from "@/public/icons/Calendar_Add.svg";
 import Schedule from "@/public/icons/schedule.svg";
 import IconAdd from "@/public/icons/add_circle.svg";
 import AddEventModal from "@/components/AddEventModal";
+import AddRoutineModal from "./AddRoutineModal";
 
 const NavBar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalIOpen, setIsModalIOpen] = useState(false);
   const { addEvent } = useEventContext();
   const router = useRouter();
   const pathname = usePathname();
@@ -22,11 +24,24 @@ const NavBar = () => {
     setIsModalOpen(true);
   };
 
+  const handleRoutineAddClick = () => {
+    if (pathname !== "/routine") {
+      router.push("/routine");
+    }
+    setIsModalIOpen(true);
+  };
+
   const closeModal = () => setIsModalOpen(false);
+  const closeIModal = () => setIsModalIOpen(false);
 
   const handleSave = (event: any) => {
     addEvent({ ...event });
     setIsModalOpen(false);
+  };
+
+  const handleISave = (event: any) => {
+    addEvent({ ...event });
+    setIsModalIOpen(false);
   };
 
   return (
@@ -44,12 +59,20 @@ const NavBar = () => {
         onClose={closeModal}
         onSave={handleSave}
       />
-      <div className="relative cursor-pointer hover:scale-105">
+      <div
+        className="relative cursor-pointer hover:scale-105"
+        onClick={handleRoutineAddClick}
+      >
         <Image src={Schedule} alt="schedule" width={40} height={40} />
         <div className="-top-1 -right-1 absolute bg-black/30">
           <Image src={IconAdd} alt="add" width={18} height={18} />
         </div>
       </div>
+      <AddRoutineModal
+        isOpen={isModalIOpen}
+        onClose={closeIModal}
+        onSave={handleISave}
+      />
     </div>
   );
 };

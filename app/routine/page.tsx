@@ -1,24 +1,15 @@
 "use client";
 
-import WeeklyRoutineCard from "@/components/WeeklyRoutineCard";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import PageContent from "@/components/PageContent";
+import { RoutineProvider } from "@/context";
 
-const Page = () => {
-  const [currentDate, setCurrentDate] = useState("");
-
-  useEffect(() => {
-    setCurrentDate(new Date().toISOString());
-  }, []);
-
-  if (!currentDate) {
-    return null;
-  }
-
+const Routine = () => {
   return (
-    <div className="relative mt-10 w-full h-full">
-      <WeeklyRoutineCard date={currentDate} start="08:00 AM" />
-    </div>
+    <RoutineProvider>
+      <PageContent />
+    </RoutineProvider>
   );
 };
 
-export default Page;
+export default Routine;

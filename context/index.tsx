@@ -1,4 +1,5 @@
 "use client";
+
 import React, {
   createContext,
   useContext,
@@ -84,3 +85,77 @@ export const EventProvider = ({ children }: EventProviderProps) => {
     </EventContext.Provider>
   );
 };
+
+export interface Routine {
+  id: string;
+  title: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+}
+
+interface RoutineContextType {
+  currentRoutines: Routine[];
+  addRoutine: (routine: Omit<Routine, "id">) => void;
+  deleteRoutine: (id: string) => void;
+  editRoutine: (updatedRoutine: Routine) => void;
+}
+
+const RoutineContext = createContext<RoutineContextType | null>(null);
+
+export const useRoutineContext = () => {
+  const context = useContext(RoutineContext);
+  if (!context) {
+    throw new Error("useRoutineContext must be used within RoutineProvider");
+  }
+  return context;
+};
+
+interface RoutineProviderProps {
+  children: ReactNode;
+}
+
+export const RoutineProvider = ({ children }: RoutineProviderProps) => {
+  const [currentRoutines, setCurrentRoutines] = useState<Routine[]>([]);
+
+  useEffect(() => {
+    const storedRoutines = localStorage.getItem("routines");
+    if (storedRoutines) {
+      setCurrentRoutines(JSON.parse(storedRoutines));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("routines", JSON.stringify(currentRoutines));
+  }, [currentRoutines]);
+
+  const addRoutine = (routine: Omit<Routine, "id">) => {
+    const id = new Date().getTime().toString();
+    const newRoutine = { ...routine, id };
+    setCurrentRoutines((prevRoutines) => [...prevRoutines, newRoutine]);
+  };
+
+  const deleteRoutine = (id: string) => {
+    setCurrentRoutines((prevRoutines) =>
+      prevRoutines.filter((routine) => routine.id !== id)
+    );
+  };
+
+  const editRoutine = (updatedRoutine: Routine) => {
+    setCurrentRoutines((prevRoutines) =>
+      prevRoutines.map((routine) =>
+        routine.id === updatedRoutine.id ? updatedRoutine : routine
+      )
+    );
+  };
+
+  return (
+    <RoutineContext.Provider
+      value={{ currentRoutines, addRoutine, deleteRoutine, editRoutine }}
+    >
+      {children}
+    </RoutineContext.Provider>
+  );
+};
+
+export default RoutineProvider;
