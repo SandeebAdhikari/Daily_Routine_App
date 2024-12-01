@@ -11,7 +11,7 @@ interface Event {
   id: string;
   title: string;
   date: string;
-  startTime: string;
+  start: string;
   endTime: string;
   backgroundColor: string;
   borderColor: string;
@@ -49,7 +49,7 @@ export const EventProvider = ({ children }: EventProviderProps) => {
   }, []);
 
   const addEvent = (event: Event) => {
-    const id = new Date().getTime().toString(); // Generate a unique ID
+    const id = new Date().getTime().toString();
     const updatedEvents = [
       ...currentEvents,
       {

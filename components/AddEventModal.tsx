@@ -14,7 +14,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({
 }) => {
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
-  const [startTime, setStartTime] = useState("");
+  const [start, setStartTime] = useState("");
   const [endTime, setEndTime] = useState("");
   const [frequency, setFrequency] = useState("once");
   const [color, setColor] = useState("#3174ad");
@@ -24,7 +24,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (startTime >= endTime) {
+    if (start >= endTime) {
       alert("End time must be after start time.");
       return;
     }
@@ -32,27 +32,26 @@ const AddEventModal: React.FC<AddEventModalProps> = ({
     const newEvent = {
       title,
       backgroundColor: color,
-      borderColor: color,
     };
 
     if (frequency === "once") {
       onSave({
         ...newEvent,
-        start: `${date}T${startTime}`,
+        start: `${date}T${start}`,
         end: `${date}T${endTime}`,
       });
     } else {
       const durationHours =
-        parseInt(endTime.split(":")[0]) - parseInt(startTime.split(":")[0]);
+        parseInt(endTime.split(":")[0]) - parseInt(start.split(":")[0]);
       const durationMinutes =
-        parseInt(endTime.split(":")[1]) - parseInt(startTime.split(":")[1]);
+        parseInt(endTime.split(":")[1]) - parseInt(start.split(":")[1]);
       const duration = `PT${durationHours}H${durationMinutes}M`;
 
       onSave({
         ...newEvent,
         rrule: {
           freq: frequency.toUpperCase(),
-          dtstart: `${date}T${startTime}`,
+          dtstart: `${date}T${start}`,
           until: `${date}T23:59:59`,
         },
         duration,
@@ -112,7 +111,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({
                 <input
                   id="event-from"
                   type="time"
-                  value={startTime}
+                  value={start}
                   onChange={(e) => setStartTime(e.target.value)}
                   className="w-full bg-transparent p-2 border-b rounded outline-none hover:border"
                   required
@@ -154,7 +153,7 @@ const AddEventModal: React.FC<AddEventModalProps> = ({
               htmlFor="event-color"
               className="mt-2 block font-semibold mb-2"
             >
-              Color
+              Background Color
             </label>
             <input
               id="event-color"
