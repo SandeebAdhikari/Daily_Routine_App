@@ -102,7 +102,9 @@ const Routine = () => {
                 />
               )}
               <div
-                ref={(el) => (sliderRefs.current[weekday] = el)}
+                ref={(el) => {
+                  sliderRefs.current[weekday] = el;
+                }}
                 className="flex gap-4 p-2 w-full h-full justify-center overflow-x-scroll whitespace-nowrap scroll-smooth no-scrollbar"
               >
                 {!filteredRoutines.length ? (

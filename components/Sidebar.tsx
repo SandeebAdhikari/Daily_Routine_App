@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Calendar from "react-calendar";
 import Link from "next/link";
 import { useEventContext, useRoutineContext } from "@/context";
+import { usePathname } from "next/navigation";
 
 interface SidebarProps {
   side: "left" | "right";
@@ -13,6 +14,7 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
   const [date, setDate] = useState(new Date());
   const { currentEvents } = useEventContext();
   const { currentRoutines } = useRoutineContext();
+  const pathname = usePathname();
 
   const weekday = new Date()
     .toLocaleDateString("en-US", { weekday: "long" })
@@ -34,7 +36,6 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
 
   const upcomingEvents = currentEvents.filter((event) => {
     if (!event.start) {
-      console.log("Missing start time for event:", event);
       return false;
     }
     const eventDateTime = new Date(event.start);
@@ -58,7 +59,11 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
           <div className="mt-48 w-full flex flex-col gap-6">
             <Link
               href="/"
-              className="p-2  h-[44px] bg-black/30 text-center inline-flex gap-2 justify-center items-center hover:bg-[#171717] hover:rounded-2xl border-b"
+              className={`p-2 h-[44px]  text-center inline-flex gap-2 justify-center items-center  ${
+                pathname === "/"
+                  ? "rounded-2xl bg-[#171717]"
+                  : "hover:rounded-2xl hover:bg-[#171717] bg-black/30"
+              } border-b`}
             >
               <Image
                 src="/icons/Calendar.svg"
@@ -70,7 +75,11 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
             </Link>
             <Link
               href="/routine"
-              className="p-2 h-[44px] bg-black/30 text-center inline-flex gap-2 justify-center items-center hover:bg-[#171717] hover:rounded-2xl border-b"
+              className={`p-2 h-[44px] text-center inline-flex gap-2 justify-center items-center ${
+                pathname === "/routine"
+                  ? "rounded-2xl bg-[#171717]"
+                  : "hover:rounded-2xl hover:bg-[#171717] bg-black/30"
+              } border-b`}
             >
               <Image
                 src="/icons/Schedule.svg"
@@ -82,7 +91,11 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
             </Link>
             <Link
               href="/notepad"
-              className="p-2 h-[44px] bg-black/30 text-center inline-flex gap-2 justify-center items-center hover:bg-[#171717] hover:rounded-2xl border-b"
+              className={`p-2 h-[44px]  text-center inline-flex gap-2 justify-center items-center  ${
+                pathname === "/notepad"
+                  ? "rounded-2xl bg-[#171717]"
+                  : "hover:rounded-2xl hover:bg-[#171717] bg-black/30"
+              } border-b`}
             >
               <Image
                 src="/icons/Note.svg"
