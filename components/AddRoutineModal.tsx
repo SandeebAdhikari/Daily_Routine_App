@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import WeekdayInput from "./WeekdayInput";
 
 interface Routine {
   id: string;
@@ -134,6 +135,8 @@ const AddRoutineModal: React.FC<AddRoutineModalProps> = ({
                   />
                 </div>
               </div>
+
+              <WeekdayInput />
             </div>
             <div className="flex justify-end">
               <button

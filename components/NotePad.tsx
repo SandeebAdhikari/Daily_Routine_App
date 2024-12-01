@@ -9,7 +9,7 @@ const NotePad: React.FC = () => {
   };
 
   return (
-    <div className="relative w-full h-[825px] bg-black/30 rounded-2xl text-white p-4">
+    <div className="relative w-full h-[815px] bg-black/30 rounded-2xl text-white p-4 shadow-sm shadow-white">
       <textarea
         value={text}
         onChange={(e) => setText(e.target.value)}

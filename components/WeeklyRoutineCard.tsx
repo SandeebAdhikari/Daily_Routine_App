@@ -48,12 +48,12 @@ const WeeklyRoutineCard: React.FC<WeeklyRoutineCardProps> = ({
   return (
     <>
       <div
-        className="w-full p-8 h-[151px] rounded-2xl bg-black/30 cursor-pointer hover:bg-black/40 transition-all"
+        className="w-full p-8 h-[151px] rounded-2xl bg-black/30 cursor-pointer hover:bg-black/40 transition-all  shadow-sm shadow-white"
         onClick={openViewModal}
       >
         <div className="flex flex-col">
           <h1 className="text-[18px] font-bold hover:underline">
-            {routine.title}
+            {routine.title.toUpperCase()}
           </h1>
           <h2 className="text-[16px]">{routine.date}</h2>
           <p className="mt-1 text-[14px]">
@@ -62,7 +62,6 @@ const WeeklyRoutineCard: React.FC<WeeklyRoutineCardProps> = ({
         </div>
       </div>
 
-      {/* View Routine Modal */}
       {isViewModalOpen && (
         <div className="fixed inset-0 bg-[#171717]/85 flex items-center justify-center z-50">
           <div className="bg-black p-6 rounded-lg shadow-lg w-[400px] relative">
@@ -75,7 +74,9 @@ const WeeklyRoutineCard: React.FC<WeeklyRoutineCardProps> = ({
             </button>
 
             <div className="flex flex-col items-start">
-              <h2 className="text-lg font-bold mb-4">{routine.title}</h2>
+              <h2 className="text-lg font-bold mb-4">
+                {routine.title.toUpperCase()}
+              </h2>
               <p>
                 <strong>Start:</strong> {routine.date} {routine.startTime}
                 <br />
