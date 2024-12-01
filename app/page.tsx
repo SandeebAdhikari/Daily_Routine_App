@@ -15,15 +15,15 @@ export default function Home() {
   const handleEventClick = (info: any) => {
     console.log("Event Info:", info.event);
 
-    const startDate = new Date(info.event.start);
-    const endDate = new Date(info.event.end);
+    const startDate = info.event.start ? new Date(info.event.start) : null;
+    const endDate = info.event.end ? new Date(info.event.end) : null;
 
     setSelectedEvent({
       id: info.event.id,
       title: info.event.title,
-      date: startDate.toISOString().split("T")[0],
-      start: startDate.toTimeString().slice(0, 5),
-      end: endDate.toTimeString().slice(0, 5),
+      date: startDate?.toISOString().split("T")[0] || "",
+      start: startDate?.toTimeString().slice(0, 5) || "",
+      end: endDate?.toTimeString().slice(0, 5) || "",
       backgroundColor: info.event.backgroundColor,
       borderColor: info.event.borderColor,
       frequency: info.event.extendedProps.frequency || "once",
@@ -44,13 +44,17 @@ export default function Home() {
   };
 
   const handleSave = (updatedEvent: any) => {
-    deleteEvent(selectedEvent.id);
+    if (selectedEvent?.id) {
+      deleteEvent(selectedEvent.id);
+    }
     addEvent(updatedEvent);
     closeEditModal();
   };
 
   const handleDelete = () => {
-    deleteEvent(selectedEvent.id);
+    if (selectedEvent?.id) {
+      deleteEvent(selectedEvent.id);
+    }
     closeModal();
   };
 
@@ -61,8 +65,8 @@ export default function Home() {
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
           initialView="dayGridMonth"
           events={currentEvents}
-          editable={true}
-          selectable={true}
+          editable
+          selectable
           eventClick={handleEventClick}
           headerToolbar={{
             left: "prev,next today",
@@ -73,9 +77,11 @@ export default function Home() {
         />
       </div>
 
+      {/* Event Details Modal */}
       {selectedEvent && !isEditModalOpen && (
         <div className="fixed inset-0 bg-[#171717]/85 flex items-center justify-center z-50">
           <div className="bg-black p-6 rounded-lg shadow-lg w-[400px] relative">
+            {/* Close Button */}
             <button
               onClick={closeModal}
               className="absolute top-2 right-2 text-gray-400 hover:text-white hover:bg-[#171717] p-2 rounded-full transition-all"
@@ -87,15 +93,25 @@ export default function Home() {
             <div className="flex flex-col items-start">
               <h2 className="text-lg font-bold mb-4">{selectedEvent.title}</h2>
               <p>
-                Start:{" "}
-                {new Date(
-                  `${selectedEvent.date}T${selectedEvent.start}`
-                ).toLocaleString()}
+                <strong>Start:</strong>{" "}
+                {selectedEvent.start
+                  ? new Intl.DateTimeFormat("en-US", {
+                      dateStyle: "medium",
+                      timeStyle: "short",
+                    }).format(
+                      new Date(`${selectedEvent.date}T${selectedEvent.start}`)
+                    )
+                  : "N/A"}
                 <br />
-                End:{" "}
-                {new Date(
-                  `${selectedEvent.date}T${selectedEvent.end}`
-                ).toLocaleString()}
+                <strong>End:</strong>{" "}
+                {selectedEvent.end
+                  ? new Intl.DateTimeFormat("en-US", {
+                      dateStyle: "medium",
+                      timeStyle: "short",
+                    }).format(
+                      new Date(`${selectedEvent.date}T${selectedEvent.end}`)
+                    )
+                  : "N/A"}
               </p>
             </div>
 
@@ -117,6 +133,7 @@ export default function Home() {
         </div>
       )}
 
+      {/* Add/Edit Event Modal */}
       {isEditModalOpen && (
         <AddEventModal
           isOpen={isEditModalOpen}
