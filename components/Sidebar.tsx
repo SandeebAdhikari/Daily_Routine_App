@@ -43,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
   });
 
   return (
-    <div className="w-[429px] flex flex-col items-center mx-5">
+    <div className="w-[429px] h-[800px] flex flex-col items-center mx-5">
       {side === "left" && (
         <div className="w-full flex flex-col items-center">
           <Image
@@ -104,6 +104,16 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
                 height={20}
               />
               NOTEPAD
+            </Link>
+            <Link
+              href="/signIn"
+              className={`mt-64 p-2 h-[44px]  text-center inline-flex gap-2 justify-center items-center ${
+                pathname === "/signIN"
+                  ? "rounded-2xl bg-[#171717]"
+                  : "hover:rounded-2xl hover:bg-[#171717] bg-black/30"
+              } border-b`}
+            >
+              Log Out
             </Link>
           </div>
         </div>
