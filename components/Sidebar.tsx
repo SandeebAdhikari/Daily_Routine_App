@@ -58,9 +58,9 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
           </h1>
           <div className="mt-48 w-full flex flex-col gap-6">
             <Link
-              href="/"
+              href="/calendar"
               className={`p-2 h-[44px]  text-center inline-flex gap-2 justify-center items-center  ${
-                pathname === "/"
+                pathname === "/calendar"
                   ? "rounded-2xl bg-[#171717]"
                   : "hover:rounded-2xl hover:bg-[#171717] bg-black/30"
               } border-b`}

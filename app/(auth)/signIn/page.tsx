@@ -30,7 +30,7 @@ const SignInPage: React.FC = () => {
       );
       if (status === 200) {
         console.log("Sign In successful:", status);
-        router.push("/");
+        router.push("/calendar");
       }
     } catch (error) {
       if (error instanceof Error) {

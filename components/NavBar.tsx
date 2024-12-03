@@ -22,8 +22,8 @@ const NavBar = () => {
   const pathname = usePathname();
 
   const handleCalendarAddClick = () => {
-    if (pathname !== "/") {
-      router.push("/");
+    if (pathname !== "/calendar") {
+      router.push("/calendar");
     }
     setIsModalOpen(true);
   };
