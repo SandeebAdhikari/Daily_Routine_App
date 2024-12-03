@@ -26,7 +26,7 @@ body {
     @apply flex items-center justify-center w-full min-h-screen;
   }
   .input-field {
-    @apply w-[336px] h-[37px] mt-10 p-2 border-b border-gray bg-transparent outline-none focus:ring-0 text-white hover:border-b-white hover:cursor-pointer hover:placeholder:text-white;
+    @apply w-[336px] h-[37px] mt-10 p-2 border-b border-tray bg-transparent outline-none focus:ring-0 text-white hover:border-b-white hover:cursor-pointer hover:placeholder:text-white;
   }
 
   .primary-button {
@@ -34,7 +34,7 @@ body {
   }
 
   .auth-link {
-    @apply text-gray hover:cursor-pointer hover:underline hover:font-bold;
+    @apply text-tray hover:cursor-pointer hover:underline hover:font-bold;
   }
   .auth-heading {
     @apply mt-8 text-[32px] text-white;

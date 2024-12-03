@@ -13,7 +13,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        gray: "#9CA3AF",
+        tray: "#9CA3AF",
       },
       fontFamily: {
         inter: "var(--font-inter)",
