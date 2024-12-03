@@ -21,6 +21,26 @@ body {
   @apply font-ibm-plex-serif;
 }
 
+@layer utilities {
+  .auth-align {
+    @apply flex items-center justify-center w-full min-h-screen;
+  }
+  .input-field {
+    @apply w-[336px] h-[37px] mt-10 p-2 border-b border-gray bg-transparent outline-none focus:ring-0 text-white hover:border-b-white hover:cursor-pointer hover:placeholder:text-white;
+  }
+
+  .primary-button {
+    @apply mt-6 bg-transparent shadow-white/35 shadow-sm text-white p-2 w-[336px] h-[48px] rounded hover:bg-white hover:text-black hover:placeholder:text-white;
+  }
+
+  .auth-link {
+    @apply text-gray hover:cursor-pointer hover:underline hover:font-bold;
+  }
+  .auth-heading {
+    @apply mt-8 text-[32px] text-white;
+  }
+}
+
 .react-calendar {
   background-color: rgba(0, 0, 0, 0.3);
   color: #ededed;

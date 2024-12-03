@@ -1,6 +1,3 @@
-import type { Metadata } from "next";
-import { Inter, IBM_Plex_Serif } from "next/font/google";
-import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import NavBar from "@/components/NavBar";
 import { RoutineProvider, EventProvider } from "@/context";
@@ -11,7 +8,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex">
+    <main className="flex">
       <EventProvider>
         <RoutineProvider>
           <Sidebar side="left" />
@@ -22,6 +19,6 @@ export default function RootLayout({
           <Sidebar side="right" />
         </RoutineProvider>
       </EventProvider>
-    </div>
+    </main>
   );
 }
