@@ -43,20 +43,54 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
   });
 
   return (
-    <div className="w-[429px] h-[800px] flex flex-col items-center mx-5">
+    <div className="w-[429px] min-h-screen flex flex-col items-center mx-5">
       {side === "left" && (
-        <div className="w-full flex flex-col items-center">
-          <Image
-            src="/icons/sa-favicon-black.svg"
-            alt="logo"
-            width={200}
-            height={200}
-            className="invert"
-          />
-          <h1 className="mt-5 w-full text-2xl text-center font-bold">
-            DAILY <span className="text-gray-500">ROUTINE</span>
-          </h1>
-          <div className="mt-48 w-full flex flex-col gap-6">
+        <div className="mt-10 w-full h-full flex flex-col items-center justify-between   ">
+          <div className="relative w-full flex items-center justify-center">
+            <Link href={"/signIn"}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 100 100"
+                width="100px"
+                height="100px"
+              >
+                <g transform="translate(26, 28) scale([0.5, 0.5,0.5, 0.5])">
+                  <circle style={{ fill: "#ffffff" }} cx="50" cy="50" r="48" />
+                  <circle style={{ fill: "#000000" }} cx="50" cy="50" r="44" />
+                  <circle
+                    style={{
+                      strokeWidth: "4pt",
+                      stroke: "#222222",
+                      fill: "none",
+                    }}
+                    cx="50"
+                    cy="50"
+                    r="42"
+                  />
+                  <g style={{ fill: "#ffffff" }}>
+                    <circle cx="50" cy="9" r="3" />
+                    <circle cx="91" cy="50" r="3" />
+                    <circle cx="50" cy="91" r="3" />
+                    <circle cx="9" cy="50" r="3" />
+                  </g>
+                  <path
+                    style={{ stroke: "#ffffff", strokeWidth: 5, fill: "none" }}
+                    d="M 50 50 45 24"
+                  />
+                  <path
+                    style={{ stroke: "#ffffff", strokeWidth: 4, fill: "none" }}
+                    d="M 50 50 28 73"
+                  />
+                  <circle style={{ fill: "#ffffff" }} cx="50" cy="50" r="4.5" />
+                </g>
+              </svg>
+            </Link>
+            <h1 className="absolute top-12 text-[32px] text-white ml-4 font-bold text-stroke">
+              DAILY <span className="text-[#aaaaaa] font-bold">ROUTINE</span>
+            </h1>
+          </div>
+
+          <div className=" w-full flex flex-col gap-6">
             <Link
               href="/calendar"
               className={`p-2 h-[44px]  text-center inline-flex gap-2 justify-center items-center  ${
@@ -105,13 +139,15 @@ const Sidebar: React.FC<SidebarProps> = ({ side }) => {
               />
               NOTEPAD
             </Link>
+          </div>
+          <div className="w-full items-center justify-center">
             <Link
               href="/signIn"
-              className={`mt-64 p-2 h-[44px]  text-center inline-flex gap-2 justify-center items-center ${
+              className={`w-full p-2 h-[44px]  text-center inline-flex gap-2 justify-center items-center ${
                 pathname === "/signIN"
                   ? "rounded-2xl bg-[#171717]"
                   : "hover:rounded-2xl hover:bg-[#171717] bg-black/30"
-              } border-b`}
+              } mb-4 border-b`}
             >
               Log Out
             </Link>
