@@ -60,14 +60,14 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, action }) => {
                 name="firstName"
                 placeholder="First Name"
                 required
-                className="input-field"
+                className="input-field1 w-1/2"
               />
               <input
                 type="text"
                 name="lastName"
                 placeholder="Last Name"
                 required
-                className="input-field"
+                className="input-field1 w-1/2"
               />
             </div>
             <input
@@ -90,14 +90,14 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, action }) => {
                 name="state"
                 placeholder="State"
                 required
-                className="input-field"
+                className="input-field1 w-1/2"
               />
               <input
                 type="text"
                 name="zip"
                 placeholder="Zip Code"
                 required
-                className="input-field"
+                className="input-field1 w-1/2"
               />
             </div>
             <div className="flex gap-2">
@@ -106,14 +106,14 @@ const AuthForm: React.FC<AuthFormProps> = ({ type, action }) => {
                 name="dob"
                 placeholder="Date of Birth"
                 required
-                className="input-field"
+                className="input-field1 w-1/2"
               />
               <input
                 type="text"
                 name="ssn"
                 placeholder="SSN"
                 required
-                className="input-field"
+                className="input-field1 w-1/2"
               />
             </div>
             <input

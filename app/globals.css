@@ -29,6 +29,10 @@ body {
     @apply w-[336px] h-[37px] mt-10 p-2 border-b border-tray bg-transparent outline-none focus:ring-0 text-white hover:border-b-white hover:cursor-pointer hover:placeholder:text-white;
   }
 
+  .input-field1 {
+    @apply mt-10 p-2 border-b border-tray bg-transparent outline-none focus:ring-0 text-white hover:border-b-white hover:cursor-pointer hover:placeholder:text-white;
+  }
+
   .primary-button {
     @apply mt-6 bg-transparent shadow-white/35 shadow-sm text-white p-2 w-[336px] h-[48px] rounded hover:bg-white hover:text-black hover:placeholder:text-white;
   }

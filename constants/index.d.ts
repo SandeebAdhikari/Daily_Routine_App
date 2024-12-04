@@ -1,4 +1,4 @@
-export const routines = {
+declare const routines = {
   MONDAY: [
     { time: "00:00", activity: "Sleep" },
     { time: "06:00", activity: "Morning Exercise" },
