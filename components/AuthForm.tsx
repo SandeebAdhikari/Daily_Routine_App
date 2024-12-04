@@ -1,12 +1,7 @@
 import React from "react";
 import Link from "next/link";
 
-const AuthForm: React.FC<AuthFormProps> = ({
-  type,
-  onChange,
-  onSubmit,
-  formData,
-}) => {
+const AuthForm: React.FC<AuthFormProps> = ({ type, action }) => {
   return (
     <div
       className={`flex flex-col p-5 items-center justify-center w-[400px] gap-28  ${
@@ -52,7 +47,7 @@ const AuthForm: React.FC<AuthFormProps> = ({
           DAILY <span className="text-[#aaaaaa] font-bold">ROUTINE</span>
         </h1>
       </div>
-      <form onSubmit={onSubmit} className="-mt-32 flex flex-col w-full p-4">
+      <form action={action} className="-mt-32 flex flex-col w-full p-4">
         <h2 className="mt-8 text-[32px] text-white">
           {type === "signIn" ? "Sign In" : "Sign Up"}
         </h2>
@@ -64,8 +59,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
                 type="text"
                 name="firstName"
                 placeholder="First Name"
-                value={formData.firstName || ""}
-                onChange={onChange}
                 required
                 className="input-field"
               />
@@ -73,8 +66,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
                 type="text"
                 name="lastName"
                 placeholder="Last Name"
-                value={formData.lastName || ""}
-                onChange={onChange}
                 required
                 className="input-field"
               />
@@ -83,8 +74,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
               type="text"
               name="address"
               placeholder="Address"
-              value={formData.address || ""}
-              onChange={onChange}
               required
               className="input-field"
             />
@@ -92,8 +81,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
               type="text"
               name="city"
               placeholder="City"
-              value={formData.city || ""}
-              onChange={onChange}
               required
               className="input-field"
             />
@@ -102,8 +89,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
                 type="text"
                 name="state"
                 placeholder="State"
-                value={formData.state || ""}
-                onChange={onChange}
                 required
                 className="input-field"
               />
@@ -111,8 +96,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
                 type="text"
                 name="zip"
                 placeholder="Zip Code"
-                value={formData.zip || ""}
-                onChange={onChange}
                 required
                 className="input-field"
               />
@@ -122,8 +105,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
                 type="text"
                 name="dob"
                 placeholder="Date of Birth"
-                value={formData.dob || ""}
-                onChange={onChange}
                 required
                 className="input-field"
               />
@@ -131,8 +112,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
                 type="text"
                 name="ssn"
                 placeholder="SSN"
-                value={formData.ssn || ""}
-                onChange={onChange}
                 required
                 className="input-field"
               />
@@ -141,8 +120,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
               type="email"
               name="email"
               placeholder="Email"
-              value={formData.email || ""}
-              onChange={onChange}
               required
               className="input-field"
             />
@@ -152,8 +129,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
           type="username"
           name="username"
           placeholder={type === "signIn" ? "Username or Email" : "Username"}
-          value={formData.username}
-          onChange={onChange}
           required
           className={`w-[336px] h-[37px] ${
             type === "signIn" ? "mt-10" : "mt-6"
@@ -163,8 +138,6 @@ const AuthForm: React.FC<AuthFormProps> = ({
           type="password"
           name="password"
           placeholder="Password"
-          value={formData.password}
-          onChange={onChange}
           required
           className="input-field"
         />

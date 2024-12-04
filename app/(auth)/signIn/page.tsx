@@ -1,57 +1,36 @@
-"use client";
-import React, { useState } from "react";
+"use server";
+
+import React from "react";
 import AuthForm from "@/components/AuthForm";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { apiCall } from "@/utils/api";
 
-const SignInPage: React.FC = () => {
-  const router = useRouter();
-  const [formData, setFormData] = useState<AuthFormData>({
-    username: "",
-    password: "",
-  });
+export const handleSignIn = async (formData: FormData) => {
+  const username = formData.get("username") as string;
+  const password = formData.get("password") as string;
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  try {
+    const { data, status } = await apiCall("/api/auth/signin", "POST", {
+      username,
+      password,
+    });
 
-  const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    try {
-      const { data, status } = await apiCall(
-        "/api/auth/signin",
-        "POST",
-        formData
-      );
-      if (status === 200) {
-        console.log("Sign In successful:", status);
-        router.push("/calendar");
-      }
-    } catch (error) {
-      if (error instanceof Error) {
-        console.error("Error during sign-in:", error.message);
-      } else {
-        console.error("Error during sign-in:", error);
-      }
-      alert("Sign-in failed!");
+    if (status === 200) {
+      console.log("Sign-in successful!");
+      redirect("/calendar");
+    } else {
+      throw new Error("Sign-in failed");
     }
-  };
-
-  return (
-    <div className="auth-align">
-      <AuthForm
-        type="signIn"
-        formData={formData}
-        onChange={handleInputChange}
-        onSubmit={handleSignIn}
-      />
-    </div>
-  );
+  } catch (error) {
+    console.error("Error during sign-in:", error);
+    throw error;
+  }
 };
+
+const SignInPage: React.FC = () => (
+  <div className="auth-align">
+    <AuthForm type="signIn" action={handleSignIn} />
+  </div>
+);
 
 export default SignInPage;

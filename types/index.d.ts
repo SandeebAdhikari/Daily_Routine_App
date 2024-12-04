@@ -14,7 +14,5 @@ declare interface AuthFormData {
 
 declare interface AuthFormProps {
   type: "signIn" | "signUp";
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  formData: AuthFormData;
+  action: (formData: FormData) => Promise<void>;
 }
