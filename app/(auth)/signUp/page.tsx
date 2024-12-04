@@ -6,35 +6,25 @@ import { redirect } from "next/navigation";
 import { apiCall } from "@/utils/api";
 
 export const handleSignUp = async (formData: FormData) => {
-  const username = formData.get("username") as string;
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
-  const firstName = formData.get("firstName") as string;
-  const lastName = formData.get("lastName") as string;
-  const address = formData.get("address") as string;
-  const city = formData.get("city") as string;
-  const state = formData.get("state") as string;
-  const zip = formData.get("zip") as string;
-  const dob = formData.get("dob") as string;
-  const ssn = formData.get("ssn") as string;
+  const payload = {
+    username: formData.get("username") as string,
+    email: formData.get("email") as string,
+    password: formData.get("password") as string,
+    firstName: formData.get("firstName") as string,
+    lastName: formData.get("lastName") as string,
+    address: formData.get("address") as string,
+    city: formData.get("city") as string,
+    state: formData.get("state") as string,
+    zip: formData.get("zip") as string,
+    dob: formData.get("dob") as string,
+    ssn: formData.get("ssn") as string,
+  };
 
   try {
-    const { status } = await apiCall("/api/auth/signup", "POST", {
-      username,
-      email,
-      password,
-      firstName,
-      lastName,
-      address,
-      city,
-      state,
-      zip,
-      dob,
-      ssn,
-    });
+    const { status } = await apiCall("/auth/signup", "POST", payload);
 
     if (status === 201) {
-      console.log("Sign-up successful:", status);
+      console.log("Sign-up successful!");
       redirect("/signIn");
     } else {
       throw new Error("Sign-up failed");

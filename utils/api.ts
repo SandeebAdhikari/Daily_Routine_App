@@ -1,36 +1,28 @@
-interface ApiCallOptions {
-  method?: string;
-  body?: any;
-  headers?: Record<string, string>;
-}
+import ky from "ky";
 
-interface ApiResponse<T> {
-  data: T;
-  status: number;
-}
+const api = ky.create({
+  prefixUrl: process.env.NEXT_PUBLIC_API_BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
 
 export const apiCall = async <T>(
   endpoint: string,
   method: string = "GET",
   body: any = null,
   headers: Record<string, string> = {}
-): Promise<ApiResponse<T>> => {
-  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
-  const options: ApiCallOptions = {
-    method,
-    headers: {
-      "Content-Type": "application/json",
-      ...headers,
-    },
-  };
-  if (body) {
-    options.body = JSON.stringify(body);
+): Promise<{ data: T; status: number }> => {
+  try {
+    const response = await api(endpoint, {
+      method,
+      json: body,
+      headers,
+    });
+    const data: T = await response.json();
+    return { data, status: response.status };
+  } catch (error) {
+    console.error("API Call Error:", error);
+    throw error;
   }
-
-  const response = await fetch(`${baseUrl}${endpoint}`, options);
-  if (!response.ok) {
-    throw new Error(`API Error: ${response.status}`);
-  }
-  const data: T = await response.json();
-  return { data, status: response.status };
 };
